@@ -46,6 +46,9 @@ class Settings(BaseSettings):
     # Logging
     LOG_LEVEL: str = "INFO"
 
+    # Bot
+    BOT_PREFIX: str = "!"
+
     def load_config_file(self) -> None:
         """Load settings from /config/settings.json if it exists."""
         config_file = self.CONFIG_DIR / "settings.json"
