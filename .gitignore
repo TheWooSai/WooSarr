@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config and secrets (Docker volume mount point)
+/config/
+config/secrets/
+config/woosarr.db
+config/woosarr.db-journal
+config/woosarr.db-wal
+config/logs/
+
+# Secrets
+secrets/
+master.key
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Test coverage
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+out/
+target/
