@@ -154,9 +154,9 @@ Edge cases to cover with tests:
 Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `VERIFY` = confirm against docs first
 
 ### Phase 0 — Discovery & Decisions
-- [ ] **P0-01** Resolve remaining OPEN decisions with the human. **Acceptance:** §2 table updated.
-- [ ] **P0-02** `VERIFY` Plex auth with python-plexapi: `MyPlexPinLogin(oauth=True)` (`oauthUrl(forwardUrl=...)`, polling/callback modes) and `MyPlexJWTLogin` (keypair, `verifyJWT`/`refreshJWT`; needs `pyjwt[crypto]`). Decide which is used for the stored admin session and how the keypair/token is stored encrypted. Confirm required headers (`X-Plex-Client-Identifier`, product). **Acceptance:** short notes in `docs/plex-notes.md` with a working example.
-- [ ] **P0-03** `VERIFY` (gate for all Plex write code) Spike script against a real/test Plex server using python-plexapi. Answer each, with notes in `docs/plex-notes.md`:
+- [x] **P0-01** Resolve remaining OPEN decisions with the human. **Acceptance:** §2 table updated.
+- [x] **P0-02** `VERIFY` Plex auth with python-plexapi: `MyPlexPinLogin(oauth=True)` (`oauthUrl(forwardUrl=...)`, polling/callback modes) and `MyPlexJWTLogin` (keypair, `verifyJWT`/`refreshJWT`; needs `pyjwt[crypto]`). Decide which is used for the stored admin session and how the keypair/token is stored encrypted. Confirm required headers (`X-Plex-Client-Identifier`, product). **Acceptance:** short notes in `docs/plex-notes.md` with a working example.
+- [x] **P0-03** `VERIFY` (gate for all Plex write code) Spike script against a real/test Plex server using python-plexapi. Answer each, with notes in `docs/plex-notes.md`:
   - (a) Does `updateFriend(user, server, sections=[...])` **replace** the user's library set or merge? 
   - (b) Does `MyPlexServerShare.sections()` return only shared sections, or all sections with a `shared` flag? (Filter on `Section.shared` until proven.)
   - (c) How to revoke the **last** library (`removeSections=True` vs empty list)?
@@ -165,8 +165,8 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `VERIFY` = confirm agai
   - (f) How to obtain the server's `machineIdentifier` and map `LibrarySection` ↔ shared `Section.key`.
   - **Acceptance:** tested script proves read-then-write preserves existing access (N6) and documents answers (a)–(f).
 - [x] **P0-04** Choose Plex SDK. **Resolved:** `python-plexapi` (see D1). Reconfirm only if P0-03 uncovers a blocker; fallback is raw HTTP to plex.tv behind `PlexGateway`.
-- [ ] **P0-05** `VERIFY` Discord requirements: required gateway intents (Guild Members is privileged), bot permissions, slash commands, and OAuth2 scopes if used for D4. **Acceptance:** `docs/discord-notes.md`.
-- [ ] **P0-06** Confirm Unraid template requirements (appdata path, port mapping, icon, WebUI link). **Acceptance:** notes in `docs/unraid-notes.md`.
+- [x] **P0-05** `VERIFY` Discord requirements: required gateway intents (Guild Members is privileged), bot permissions, slash commands, and OAuth2 scopes if used for D4. **Acceptance:** `docs/discord-notes.md`.
+- [x] **P0-06** Confirm Unraid template requirements (appdata path, port mapping, icon, WebUI link). **Acceptance:** notes in `docs/unraid-notes.md`.
 
 ### Phase 1 — Foundation
 *Depends on: P0-01, P0-04*
