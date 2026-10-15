@@ -345,3 +345,6 @@ Legend: `[ ]` todo · `[~]` in progress · `[x]` done · `VERIFY` = confirm agai
 - TypeScript SDK docs: https://github.com/LukasParke/plexapi-dev-docs/tree/main/sdks/typescript
 - Go SDK docs: https://github.com/LukasParke/plexapi-dev-docs/tree/main/sdks/go
 - Discord developer docs: https://docs.discord.com/developers/intro
+- discord.py docs: https://discordpy.readthedocs.io/en/stable/
+- Unraid Docker templates: https://github.com/unraid/docker-templates
+- Unraid Community Apps: https://github.com/unraid/community-apps
