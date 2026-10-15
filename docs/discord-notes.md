@@ -6,6 +6,7 @@
 ## Slash Commands
 
 ### Registration
+
 Slash commands are registered using the `@bot.tree.command()` decorator:
 
 ```python
@@ -24,6 +25,7 @@ await tree.sync()
 ```
 
 ### Command Options
+
 ```python
 @tree.command(name="grant", description="Grant library access")
 async def grant(
@@ -35,6 +37,7 @@ async def grant(
 ```
 
 ### Rate Limits
+
 - Global: 5 requests per second
 - Per-endpoint: Varies (see Discord docs)
 - Slash command registration: Limited, sync once at startup
@@ -42,7 +45,9 @@ async def grant(
 ## Privileged Intents
 
 ### MEMBERS Intent
+
 Required for:
+
 - Getting guild members
 - Getting member roles
 - Tracking role changes
@@ -55,6 +60,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 ```
 
 ### Requirements
+
 - Bots in < 100 servers: Enable in Developer Portal
 - Bots in ≥ 100 servers: Requires verification
 - WooSarr use case: Single guild, no verification needed
@@ -62,6 +68,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 ## Event Handling
 
 ### Role Changes
+
 ```python
 @bot.event
 async def on_member_update(before, after):
@@ -71,6 +78,7 @@ async def on_member_update(before, after):
 ```
 
 ### Member Join/Leave
+
 ```python
 @bot.event
 async def on_member_join(member):
@@ -84,13 +92,16 @@ async def on_member_remove(member):
 ```
 
 ## Verification Result
+
 ✅ **VERIFIED:** discord.py supports all required features:
+
 - Slash commands with options
 - Privileged intents (MEMBERS)
 - Role change event handling
 - Member join/leave events
 
 ## Notes
+
 - Use `tree.sync()` to register slash commands
 - MEMBERS intent is required for role tracking
 - Rate limits are generous for single-guild use

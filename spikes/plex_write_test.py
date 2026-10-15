@@ -43,7 +43,7 @@ def main():
     if len(servers) > 0 and len(friends) > 0:
         server = servers[0]
         friend = friends[0]
-        print(f"\n--- Dry Run: updateFriend ---")
+        print("\n--- Dry Run: updateFriend ---")
         print(f"Would update friend {friend.title} (id: {friend.id})")
         print(f"on server {server.name} (id: {server.id})")
         print("To actually test, uncomment the updateFriend call below.")

@@ -5,6 +5,7 @@
 ## Docker Container Template Format
 
 Unraid uses XML templates for Docker containers. The template defines:
+
 - Container name
 - Image repository and tag
 - Port mappings
@@ -64,15 +65,15 @@ Unraid uses XML templates for Docker containers. The template defines:
 
 ## Required Fields
 
-| Field | Description |
-|-------|-------------|
-| Name | Container name |
-| Repository | Docker image repository:tag |
-| Networking | Network mode (bridge, host, etc.) |
-| RestartPolicy | Restart behavior |
-| MapPort | Port mappings (HostPort, ContainerPort, Protocol) |
-| Volume | Volume mounts (HostDir, ContainerDir, Mode) |
-| Environment | Environment variables |
+| Field         | Description                                       |
+| ------------- | ------------------------------------------------- |
+| Name          | Container name                                    |
+| Repository    | Docker image repository:tag                       |
+| Networking    | Network mode (bridge, host, etc.)                 |
+| RestartPolicy | Restart behavior                                  |
+| MapPort       | Port mappings (HostPort, ContainerPort, Protocol) |
+| Volume        | Volume mounts (HostDir, ContainerDir, Mode)       |
+| Environment   | Environment variables                             |
 
 ## Volume Mappings
 
@@ -96,5 +97,6 @@ Unraid uses XML templates for Docker containers. The template defines:
 4. Template URL: `https://raw.githubusercontent.com/TheWooSai/WooSarr/main/unraid/woosarr.xml`
 
 ## Verification Result
+
 ✅ **VERIFIED:** Unraid template requirements documented.
 Template will be created in `unraid/woosarr.xml`.

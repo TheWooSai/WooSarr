@@ -6,6 +6,7 @@
 ## P0-02: Plex Auth with python-plexapi
 
 ### OAuth/PIN Flow
+
 python-plexapi supports PIN-based OAuth via `MyPlexPinLogin`:
 
 ```python
@@ -30,6 +31,7 @@ if success:
 ```
 
 ### JWT Authentication
+
 For long-lived authentication, use JWT:
 
 ```python
@@ -51,6 +53,7 @@ valid = jwt_login.verifyJWT(refreshWithinDays=1)
 ```
 
 ### Direct Token Login
+
 For simple cases, use direct token authentication:
 
 ```python
@@ -60,7 +63,9 @@ account = MyPlexAccount(token="your_plex_token")
 ```
 
 ### Verification Result
+
 ✅ **VERIFIED:** python-plexapi supports all required auth flows:
+
 - PIN-based OAuth (MyPlexPinLogin)
 - JWT authentication (MyPlexJWTLogin)
 - Direct token authentication (MyPlexAccount)
@@ -68,6 +73,7 @@ account = MyPlexAccount(token="your_plex_token")
 ## P0-03: Plex Write Operations
 
 ### updateFriend() Method
+
 The `updateFriend()` method exists on `MyPlexAccount`:
 
 ```python
@@ -89,6 +95,7 @@ account.updateFriend(
 ```
 
 ### MyPlexServerShare Methods
+
 The `MyPlexServerShare` class provides additional methods:
 
 - `update()` - Update share settings
@@ -114,11 +121,14 @@ The `MyPlexServerShare` class provides additional methods:
    ⚠️ Unknown - need to test. May need to add as friend first.
 
 ### Verification Result
+
 ✅ **VERIFIED:** python-plexapi supports library sharing operations:
+
 - `updateFriend()` for granting/revoking access
 - `MyPlexServerShare` for share management
 
 ### Spike Script
+
 Created `spikes/plex_write_test.py` to test write operations.
 
 ```python
