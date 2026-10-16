@@ -17,8 +17,8 @@ from app.core.config import settings
 class SecretsManager:
     """Manages encryption keys and secret encryption/decryption."""
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, secrets_dir: Optional[Path] = None) -> None:
+        self.secrets_dir = secrets_dir or settings.SECRETS_DIR
 
     def _ensure_secrets_dir(self) -> None:
         """Ensure secrets directory exists with correct permissions."""
