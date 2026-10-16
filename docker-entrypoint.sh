@@ -24,5 +24,9 @@ if [ -n "$PUID" ] || [ -n "$PGID" ]; then
     chown -R "$PUID":"$PGID" /app /config
 fi
 
+# Ensure config directories exist and have correct ownership
+mkdir -p /config/secrets /config/logs
+chown -R woosarr:woosarr /config
+
 # Run as non-root user
 exec su -s /bin/bash woosarr -c "$*"

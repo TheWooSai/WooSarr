@@ -87,11 +87,7 @@ class DBLogHandler(Handler):
             log_entry = LogEntry(
                 timestamp=datetime.fromtimestamp(record.created),
                 level=record.levelname,
-                logger=record.name,
                 message=record.getMessage(),
-                module=record.module,
-                function=record.funcName,
-                line=record.lineno,
             )
 
             db = SessionLocal()
