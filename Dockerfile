@@ -1,11 +1,11 @@
-FROM python:3.12-slim AS backend-builder
+FROM python:3.13-slim AS backend-builder
 
 WORKDIR /app/backend
 
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-FROM node:20-slim AS frontend-builder
+FROM node:24-slim AS frontend-builder
 
 WORKDIR /app/frontend
 
@@ -15,7 +15,7 @@ RUN npm ci
 COPY frontend/ .
 RUN npm run build
 
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy backend
 COPY --from=backend-builder /app/backend .
-COPY --from=backend-builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=backend-builder /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
 COPY --from=backend-builder /usr/local/bin /usr/local/bin
 
 # Copy frontend build
