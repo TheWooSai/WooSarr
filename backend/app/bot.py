@@ -57,6 +57,12 @@ class WooSarrBot(commands.Bot):
         # Emit event to sync engine
         # TODO: Implement event queue
 
+    @commands.command(name="link")
+    async def link(self, ctx, plex_username: str):
+        """Link your Plex account to your Discord account."""
+        # TODO: Implement linking logic
+        await ctx.send(f"Linked Plex account {plex_username} to your Discord account.")
+
 
 class BotManager:
     """Manages the Discord bot lifecycle."""

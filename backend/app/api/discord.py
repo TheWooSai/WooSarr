@@ -147,3 +147,19 @@ def list_members():
             "role_ids": [str(role.id) for role in member.roles],
         })
     return {"members": members}
+
+
+@router.post("/link")
+def link_user(plex_user_id: str, discord_user_id: str, method: str = "manual"):
+    """Link a Plex user to a Discord user."""
+    # TODO: Store link in database
+    logger.info(f"Linked Plex user {plex_user_id} to Discord user {discord_user_id} via {method}")
+    return {"success": True, "message": "Users linked"}
+
+
+@router.post("/unlink")
+def unlink_user(plex_user_id: str, discord_user_id: str):
+    """Unlink a Plex user from a Discord user."""
+    # TODO: Remove link from database
+    logger.info(f"Unlinked Plex user {plex_user_id} from Discord user {discord_user_id}")
+    return {"success": True, "message": "Users unlinked"}
