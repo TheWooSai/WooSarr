@@ -1,4 +1,11 @@
 import { useState, useEffect } from 'react';
+import Dashboard from './pages/Dashboard';
+import Users from './pages/Users';
+import Roles from './pages/Roles';
+import Libraries from './pages/Libraries';
+import Logs from './pages/Logs';
+import Settings from './pages/Settings';
+import Setup from './pages/Setup';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
@@ -32,6 +39,27 @@ function App() {
   ];
 
   const isDark = theme === 'dark';
+
+  const renderPage = () => {
+    switch (activePage) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'users':
+        return <Users />;
+      case 'roles':
+        return <Roles />;
+      case 'libraries':
+        return <Libraries />;
+      case 'logs':
+        return <Logs />;
+      case 'settings':
+        return <Settings />;
+      case 'setup':
+        return <Setup />;
+      default:
+        return <Dashboard />;
+    }
+  };
 
   return (
     <div style={{
@@ -96,8 +124,7 @@ function App() {
         backgroundColor: isDark ? '#1a1a2e' : '#f5f5f5',
         color: isDark ? '#fff' : '#000',
       }}>
-        <h1>{activePage.charAt(0).toUpperCase() + activePage.slice(1)}</h1>
-        <p>Content for {activePage} page</p>
+        {renderPage()}
       </main>
     </div>
   );
