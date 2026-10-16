@@ -77,3 +77,73 @@ def set_token(request: DiscordTokenRequest):
     secrets = SecretsManager(settings.SECRETS_DIR)
     secrets.set("discord_token", request.token)
     return {"success": True, "message": "Token saved"}
+
+
+@router.get("/guilds")
+def list_guilds():
+    """List all guilds the bot is in."""
+    if not bot_manager.is_running() or not bot_manager._bot:
+        return {"guilds": []}
+
+    guilds = []
+    for guild in bot_manager._bot.guilds:
+        guilds.append({
+            "id": str(guild.id),
+            "name": guild.name,
+        })
+    return {"guilds": guilds}
+
+
+@router.post("/guilds/select")
+def select_guild(guild_id: str):
+    """Select a guild to manage."""
+    secrets = SecretsManager(settings.SECRETS_DIR)
+    secrets.set("discord_guild_id", guild_id)
+    return {"success": True, "message": "Guild selected"}
+
+
+@router.get("/roles")
+def list_roles():
+    """List all roles in the selected guild."""
+    secrets = SecretsManager(settings.SECRETS_DIR)
+    guild_id = secrets.get("discord_guild_id")
+
+    if not guild_id or not bot_manager.is_running() or not bot_manager._bot:
+        return {"roles": []}
+
+    guild = bot_manager._bot.get_guild(int(guild_id))
+    if not guild:
+        return {"roles": []}
+
+    roles = []
+    for role in guild.roles:
+        roles.append({
+            "id": str(role.id),
+            "name": role.name,
+            "color": str(role.color),
+            "position": role.position,
+        })
+    return {"roles": roles}
+
+
+@router.get("/members")
+def list_members():
+    """List all members in the selected guild."""
+    secrets = SecretsManager(settings.SECRETS_DIR)
+    guild_id = secrets.get("discord_guild_id")
+
+    if not guild_id or not bot_manager.is_running() or not bot_manager._bot:
+        return {"members": []}
+
+    guild = bot_manager._bot.get_guild(int(guild_id))
+    if not guild:
+        return {"members": []}
+
+    members = []
+    for member in guild.members:
+        members.append({
+            "id": str(member.id),
+            "display_name": member.display_name,
+            "role_ids": [str(role.id) for role in member.roles],
+        })
+    return {"members": members}
