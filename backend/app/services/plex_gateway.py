@@ -91,3 +91,13 @@ class PlexGateway(ABC):
     def list_servers(self) -> List[PlexServerInfo]:
         """List all servers owned by the authenticated account."""
         pass
+
+    @abstractmethod
+    def get_user_shared_libraries(self, user: PlexUser) -> Set[int]:
+        """Get the set of library keys shared with a user."""
+        pass
+
+    @abstractmethod
+    def set_user_libraries(self, user: PlexUser, library_keys: Set[int]) -> bool:
+        """Set the libraries shared with a user (replaces existing)."""
+        pass

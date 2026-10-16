@@ -83,3 +83,12 @@ class FakePlexGateway(PlexGateway):
     def list_servers(self) -> List[PlexServerInfo]:
         """List all servers owned by the authenticated account."""
         return [self._server_info]
+
+    def get_user_shared_libraries(self, user: PlexUser) -> Set[int]:
+        """Get the set of library keys shared with a user."""
+        return self._user_libraries.get(user.id, set()).copy()
+
+    def set_user_libraries(self, user: PlexUser, library_keys: Set[int]) -> bool:
+        """Set the libraries shared with a user."""
+        self._user_libraries[user.id] = library_keys.copy()
+        return True

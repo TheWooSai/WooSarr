@@ -180,3 +180,57 @@ class PlexApiGateway(PlexGateway):
             return servers
         except Exception:
             return []
+
+    def get_user_shared_libraries(self, user: PlexUser) -> Set[int]:
+        """Get the set of library keys shared with a user."""
+        if not self._token:
+            return set()
+
+        try:
+            from plexapi.myplex import MyPlexAccount
+
+            account = MyPlexAccount(token=self._token)
+            library_keys = set()
+
+            for share in account.sharedLibraries():
+                if share.ownerID == user.id:
+                    library_keys.add(share.key)
+
+            return library_keys
+        except Exception:
+            return set()
+
+    def set_user_libraries(self, user: PlexUser, library_keys: Set[int]) -> bool:
+        """Set the libraries shared with a user (replaces existing)."""
+        if not self._token:
+            return False
+
+        try:
+            from plexapi.myplex import MyPlexAccount
+
+            account = MyPlexAccount(token=self._token)
+
+            # Get current shares for this user
+            current_shares = [
+                share for share in account.sharedLibraries()
+                if share.ownerID == user.id
+            ]
+
+            # Remove shares not in the new set
+            for share in current_shares:
+                if share.key not in library_keys:
+                    share.delete()
+
+            # Add shares not already shared
+            for key in library_keys:
+                already_shared = any(share.key == key for share in current_shares)
+                if not already_shared:
+                    # Find the library section
+                    for section in self._server.library.sections():
+                        if section.key == key:
+                            account.shareSection(section, user.username)
+                            break
+
+            return True
+        except Exception:
+            return False
