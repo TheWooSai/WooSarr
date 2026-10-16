@@ -1,11 +1,16 @@
 import os
 
 from app.api import auth, health, libraries, logs, roles, setup, sync, users
+from app.core.config import settings
 from app.core.database import init_db
+from app.core.logging import setup_logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+
+# Setup logging
+logger = setup_logging()
 
 app = FastAPI(title="WooSarr", description="Plex ↔ Discord Role Library Sync", version="1.0.0")
 
@@ -46,5 +51,6 @@ async def serve_frontend():
 async def startup():
     try:
         init_db()
+        logger.info("Database initialized successfully")
     except Exception as e:
-        print(f"Warning: Could not initialize DB: {e}")
+        logger.warning(f"Could not initialize DB: {e}")
