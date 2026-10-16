@@ -79,3 +79,7 @@ class FakePlexGateway(PlexGateway):
     def get_auth_token(self) -> Optional[str]:
         """Get the current auth token."""
         return self._auth_token
+
+    def list_servers(self) -> List[PlexServerInfo]:
+        """List all servers owned by the authenticated account."""
+        return [self._server_info]

@@ -86,3 +86,8 @@ class PlexGateway(ABC):
     def get_auth_token(self) -> Optional[str]:
         """Get the current auth token."""
         pass
+
+    @abstractmethod
+    def list_servers(self) -> List[PlexServerInfo]:
+        """List all servers owned by the authenticated account."""
+        pass

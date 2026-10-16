@@ -194,3 +194,33 @@ def get_status():
         }
     else:
         return {"authenticated": False, "message": "Token invalid or expired"}
+
+
+@router.get("/servers")
+def list_servers():
+    """List all Plex servers owned by the authenticated account."""
+    secrets = SecretsManager(settings.SECRETS_DIR)
+    token = secrets.get("plex_token")
+
+    if not token:
+        return {"servers": [], "message": "Not authenticated"}
+
+    gateway = PlexApiGateway(settings.PLEX_SERVER_URL, token)
+    servers = gateway.list_servers()
+    return {
+        "servers": [
+            {
+                "machine_identifier": s.machine_identifier,
+                "friendly_name": s.friendly_name,
+            }
+            for s in servers
+        ]
+    }
+
+
+@router.post("/servers/select")
+def select_server(machine_identifier: str):
+    """Select a Plex server to manage."""
+    secrets = SecretsManager(settings.SECRETS_DIR)
+    secrets.set("plex_server_id", machine_identifier)
+    return {"success": True, "message": "Server selected"}
