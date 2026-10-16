@@ -115,3 +115,39 @@ def set_log_level(level: str):
         logger.setLevel(level_map[level.lower()])
         return {"success": True, "message": f"Log level set to {level}"}
     return {"success": False, "message": "Invalid log level"}
+
+
+@router.get("/container")
+def get_container_logs(
+    lines: int = Query(100, ge=1, le=1000),
+    since: Optional[str] = Query(None),
+):
+    """Get container logs from Docker."""
+    import subprocess
+
+    try:
+        cmd = ["docker", "logs", "woosarr"]
+        if lines:
+            cmd.extend(["--tail", str(lines)])
+        if since:
+            cmd.extend(["--since", since])
+
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        log_lines = result.stdout.split("\n")
+
+        # Parse log lines into structured format
+        parsed_logs = []
+        for line in log_lines:
+            if line.strip():
+                parsed_logs.append({
+                    "timestamp": "",
+                    "level": "INFO",
+                    "component": "container",
+                    "message": line.strip(),
+                })
+
+        return {"logs": parsed_logs}
+    except subprocess.TimeoutExpired:
+        return {"logs": [], "error": "Timeout reading logs"}
+    except Exception as e:
+        return {"logs": [], "error": str(e)}
