@@ -1,6 +1,6 @@
 import os
 
-from app.api import auth, health, libraries, logs, plex, roles, setup, sync, users
+from app.api import auth, discord, health, libraries, logs, plex, roles, setup, sync, users
 from app.core.config import settings
 from app.core.database import init_db
 from app.core.logging import setup_logging
@@ -31,6 +31,7 @@ app.include_router(roles.router, prefix="/api/roles", tags=["roles"])
 app.include_router(libraries.router, prefix="/api/libraries", tags=["libraries"])
 app.include_router(logs.router, prefix="/api/logs", tags=["logs"])
 app.include_router(plex.router, prefix="/api/plex", tags=["plex"])
+app.include_router(discord.router, prefix="/api/discord", tags=["discord"])
 app.include_router(setup.router, prefix="/api/setup", tags=["setup"])
 app.include_router(sync.router, prefix="/api/sync", tags=["sync"])
 
