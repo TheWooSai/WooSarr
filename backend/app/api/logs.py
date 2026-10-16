@@ -96,3 +96,22 @@ def get_recent_logs(limit: int = Query(20, ge=1, le=100)):
         }) for log in logs]
     finally:
         db.close()
+
+
+@router.post("/level")
+def set_log_level(level: str):
+    """Set the log level."""
+    import logging
+    from app.core.logging import setup_logging
+
+    logger = setup_logging()
+    level_map = {
+        "debug": logging.DEBUG,
+        "info": logging.INFO,
+        "warning": logging.WARNING,
+        "error": logging.ERROR,
+    }
+    if level.lower() in level_map:
+        logger.setLevel(level_map[level.lower()])
+        return {"success": True, "message": f"Log level set to {level}"}
+    return {"success": False, "message": "Invalid log level"}
