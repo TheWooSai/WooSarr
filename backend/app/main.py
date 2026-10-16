@@ -49,7 +49,7 @@ app.include_router(sync.router, prefix="/api/sync", tags=["sync"])
 # Serve static files
 static_dir = "/app/static"
 if os.path.exists(static_dir):
-    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 
 
 @app.get("/")
