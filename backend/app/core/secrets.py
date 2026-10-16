@@ -121,6 +121,18 @@ class SecretsManager:
         finally:
             db.close()
 
+    def set(self, key: str, value: str) -> None:
+        """Alias for store_secret."""
+        self.store_secret(key, value)
+
+    def get(self, key: str) -> Optional[str]:
+        """Alias for get_secret."""
+        return self.get_secret(key)
+
+    def delete(self, key: str) -> None:
+        """Alias for delete_secret."""
+        self.delete_secret(key)
+
     def delete_secret(self, key: str) -> None:
         """Delete a secret from the settings table."""
         from app.core.database import SessionLocal
