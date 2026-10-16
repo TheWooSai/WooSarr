@@ -5,6 +5,12 @@ WORKDIR /app/backend
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy backend source code
+COPY backend/app ./app
+COPY backend/alembic ./alembic
+COPY backend/alembic.ini .
+COPY backend/config ./config
+
 FROM node:24-slim AS frontend-builder
 
 WORKDIR /app/frontend
