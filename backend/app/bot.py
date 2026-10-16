@@ -30,27 +30,32 @@ class WooSarrBot(commands.Bot):
         """Called when a member's roles change."""
         if before.roles != after.roles:
             logger.info(f"Member {after.display_name} roles changed")
-            # TODO: Emit event to sync engine
+            # Emit event to sync engine
+            # TODO: Implement event queue
 
     async def on_role_update(self, role):
         """Called when a role is updated."""
         logger.info(f"Role {role.name} updated")
-        # TODO: Emit event to sync engine
+        # Emit event to sync engine
+        # TODO: Implement event queue
 
     async def on_role_delete(self, role):
         """Called when a role is deleted."""
         logger.info(f"Role {role.name} deleted")
-        # TODO: Emit event to sync engine
+        # Emit event to sync engine
+        # TODO: Implement event queue
 
     async def on_member_join(self, member):
         """Called when a member joins."""
         logger.info(f"Member {member.display_name} joined")
-        # TODO: Emit event to sync engine
+        # Emit event to sync engine
+        # TODO: Implement event queue
 
     async def on_member_remove(self, member):
         """Called when a member leaves."""
         logger.info(f"Member {member.display_name} left")
-        # TODO: Emit event to sync engine
+        # Emit event to sync engine
+        # TODO: Implement event queue
 
 
 class BotManager:
