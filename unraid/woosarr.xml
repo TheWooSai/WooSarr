@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Container>
   <Name>woosarr</Name>
-  <Repository>ghcr.io/woosarr/woosarr:latest</Repository>
+  <Repository>ghcr.io/thewoosai/woosarr:latest</Repository>
   <Registry></Registry>
   <Networking>bridge</Networking>
   <Privileged>false</Privileged>
