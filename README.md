@@ -38,6 +38,13 @@ Add the WooSarr template to your Unraid installation:
 
 After starting the container, navigate to `http://your-server:2000` to access the web UI.
 
+### First-Run Walkthrough
+
+1. **Setup Discord Bot**: Create a Discord application, add a bot, and copy the token.
+2. **Setup Plex Integration**: Sign in with Plex OAuth and select your server.
+3. **Configure Mappings**: Map Discord roles to Plex libraries.
+4. **Start Syncing**: Enable automatic sync to keep access in sync.
+
 ### Reverse Proxy / HTTPS
 
 Port 2000 is HTTP by default. For production use, we recommend placing WooSarr behind a reverse proxy with HTTPS:
@@ -59,6 +66,20 @@ server {
     }
 }
 ```
+
+## FAQ
+
+**Q: What happens if I lose my master key?**
+A: You will need to re-enter your secrets (Plex token, Discord token). The master key encrypts these secrets in the database.
+
+**Q: Can I grant access to a user without a Discord role?**
+A: Yes, you can use manual grants to give access to specific users.
+
+**Q: Can I exempt a user from automatic sync?**
+A: Yes, you can add exemptions to prevent automatic role changes for specific users.
+
+**Q: How often does WooSarr sync?**
+A: WooSarr syncs automatically when Discord role changes are detected. You can also trigger a manual sync from the web UI.
 
 ## Development
 
