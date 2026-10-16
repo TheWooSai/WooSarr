@@ -1,5 +1,8 @@
 FROM python:3.13-slim AS backend-builder
 
+ARG BUILD_VERSION
+ARG BUILD_DATE
+
 WORKDIR /app/backend
 
 COPY backend/requirements.txt .
@@ -22,6 +25,12 @@ COPY frontend/ .
 RUN npm run build
 
 FROM python:3.13-slim
+
+ARG BUILD_VERSION
+ARG BUILD_DATE
+
+ENV BUILD_VERSION=${BUILD_VERSION}
+ENV BUILD_DATE=${BUILD_DATE}
 
 WORKDIR /app
 
