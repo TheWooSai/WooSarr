@@ -182,7 +182,7 @@ _Depends on: P0-01, P0-04_
 - [x] **P1-05** Secrets manager (N1, N7, D5): encrypt/decrypt, key generation, rotation function, masking helper. **Acceptance:** unit tests; key file perms 0600; plaintext never in DB.
 - [x] **P1-06** Logging system: structured logs, levels, **redaction filter** for tokens/secrets, persisted to DB + rotating file, queryable/streamable. **Acceptance:** test proves a known token string is redacted in all outputs.
 - [x] **P1-07** FastAPI skeleton, health endpoint, error handling, API versioning, session handling. **Acceptance:** `/api/health` returns 200 on port 2000.
-- [ ] **P1-08** OpenAPI → TypeScript type pipeline (D1a): script exports FastAPI's OpenAPI schema and generates `frontend/src/generated/` types; CI/local check fails if generated types are stale. **Acceptance:** changing an API response model changes the generated types and breaks the frontend build until fixed.
+- [x] **P1-08** OpenAPI → TypeScript type pipeline (D1a): script exports FastAPI's OpenAPI schema and generates `frontend/src/generated/` types; CI/local check fails if generated types are stale. **Acceptance:** changing an API response model changes the generated types and breaks the frontend build until fixed.
 
 ### Phase 2 — Containerization (early, so it's always deployable)
 
