@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container>
+  <Name>woosarr</Name>
+  <Repository>ghcr.io/woosarr/woosarr:latest</Repository>
+  <Registry></Registry>
+  <Networking>bridge</Networking>
+  <Privileged>false</Privileged>
+  <RestartPolicy>unless-stopped</RestartPolicy>
+  <MemoryLimit>0</MemoryLimit>
+  <MemorySwapLimit>0</MemorySwapLimit>
+  <CpuPeriod>0</CpuPeriod>
+  <CpuQuota>0</CpuQuota>
+  <CpuShares>0</CpuShares>
+  <CpuSetCpus></CpuSetCpus>
+  <OomKillDisable>false</OomKillDisable>
+  <HostNetwork>false</HostNetwork>
+  <HostPID>false</HostPID>
+  <HostIPC>false</HostIPC>
+  <PublishAllPorts>false</PublishAllPorts>
+  <PortForwarding>
+    <Port>
+      <HostPort>2000</HostPort>
+      <ContainerPort>2000</ContainerPort>
+      <Protocol>tcp</Protocol>
+    </Port>
+  </PortForwarding>
+  <Volume>
+    <HostDir>/mnt/user/appdata/woosarr</HostDir>
+    <ContainerDir>/config</ContainerDir>
+    <Mode>rw</Mode>
+  </Volume>
+  <Environment>
+    <Variable>
+      <Name>PUID</Name>
+      <Value>99</Value>
+    </Variable>
+    <Variable>
+      <Name>PGID</Name>
+      <Value>100</Value>
+    </Variable>
+    <Variable>
+      <Name>CONFIG_DIR</Name>
+      <Value>/config</Value>
+    </Variable>
+  </Environment>
+  <ConsoleMode></ConsoleMode>
+  <WebUI>http://[IP]:[PORT:2000]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/woosarr/woosarr/main/unraid/woosarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/woosarr/woosarr/main/unraid/icon.png</Icon>
+  <Description>WooSarr - Plex &amp; Discord role-based library sync. Automatically grants/removes Plex library access based on Discord roles.</Description>
+  <ExtraParams></ExtraParams>
+</Container>

@@ -188,10 +188,10 @@ _Depends on: P0-01, P0-04_
 
 _Depends on: P1-07_
 
-- [ ] **P2-01** Multi-stage Dockerfile (build UI, slim runtime, non-root user, PUID/PGID support for Unraid). **Acceptance:** image builds; runs; persists to `/config`.
-- [ ] **P2-02** Healthcheck + graceful shutdown. **Acceptance:** `docker ps` shows healthy; SIGTERM stops cleanly.
-- [ ] **P2-03** Unraid Community Apps template XML (port 2000, `/config` → `/mnt/user/appdata/woosarr`, WebUI URL, icon, description). **Acceptance:** template validates; installs via "Add Container" on test Unraid.
-- [ ] **P2-04** GitHub Actions workflow to build and publish Docker image to GHCR/Docker Hub on push to main and tagged releases. Versioned tags, multi-arch if feasible. **Acceptance:** tagged release produces a pullable image; workflow runs on push.
+- [x] **P2-01** Multi-stage Dockerfile (build UI, slim runtime, non-root user, PUID/PGID support for Unraid). **Acceptance:** image builds; runs; persists to `/config`.
+- [x] **P2-02** Healthcheck + graceful shutdown. **Acceptance:** `docker ps` shows healthy; SIGTERM stops cleanly.
+- [x] **P2-03** Unraid Community Apps template XML (port 2000, `/config` → `/mnt/user/appdata/woosarr`, WebUI URL, icon, description). **Acceptance:** template validates; installs via "Add Container" on test Unraid.
+- [x] **P2-04** GitHub Actions workflow to build and publish Docker image to GHCR/Docker Hub on push to main and tagged releases. Versioned tags, multi-arch if feasible. **Acceptance:** tagged release produces a pullable image; workflow runs on push.
 
 ### Phase 3 — Plex Integration
 
