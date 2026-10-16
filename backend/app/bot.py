@@ -26,6 +26,18 @@ class WooSarrBot(commands.Bot):
         """Called when the bot is ready."""
         logger.info(f"Bot is ready. Logged in as {self.user}")
 
+    async def on_disconnect(self):
+        """Called when the bot disconnects."""
+        logger.warning("Bot disconnected")
+
+    async def on_reconnect(self):
+        """Called when the bot reconnects."""
+        logger.info("Bot reconnected")
+
+    async def on_error(self, event_name, *args, **kwargs):
+        """Called when an error occurs."""
+        logger.error(f"Error in {event_name}: {args}")
+
     async def on_member_update(self, before, after):
         """Called when a member's roles change."""
         if before.roles != after.roles:
