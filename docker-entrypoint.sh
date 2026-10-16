@@ -25,4 +25,4 @@ if [ -n "$PUID" ] || [ -n "$PGID" ]; then
 fi
 
 # Run as non-root user
-exec su-exec woosarr "$@"
+exec su -s /bin/bash woosarr -c "$*"
