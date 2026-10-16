@@ -62,3 +62,64 @@ def calculate_diff(
     to_add = desired_libraries - current_libraries
     to_remove = current_libraries - desired_libraries
     return to_add, to_remove
+
+
+def apply_sync(
+    user,
+    current_libraries: Set[int],
+    desired_libraries: Set[int],
+    plex_gateway,
+    dry_run: bool = False,
+    logger=None,
+) -> Dict:
+    """Apply the sync for a user.
+
+    Args:
+        user: The Plex user object.
+        current_libraries: Set of library keys currently shared.
+        desired_libraries: Set of library keys that should be shared.
+        plex_gateway: The PlexGateway instance to use for API calls.
+        dry_run: If True, don't actually make changes.
+        logger: Optional logger instance.
+
+    Returns:
+        Dict with sync results.
+    """
+    to_add, to_remove = calculate_diff(current_libraries, desired_libraries)
+
+    result = {
+        "user_id": user.id,
+        "user_name": user.username,
+        "to_add": list(to_add),
+        "to_remove": list(to_remove),
+        "changes_made": False,
+        "errors": [],
+    }
+
+    if not to_add and not to_remove:
+        if logger:
+            logger.info(f"No changes needed for {user.username}")
+        return result
+
+    if dry_run:
+        if logger:
+            logger.info(f"[DRY RUN] Would add {to_add} and remove {to_remove} for {user.username}")
+        return result
+
+    # Apply changes
+    try:
+        success = plex_gateway.set_user_libraries(user, desired_libraries)
+        if success:
+            result["changes_made"] = True
+            if logger:
+                logger.info(f"Synced {user.username}: added {to_add}, removed {to_remove}")
+        else:
+            result["errors"].append("Failed to set libraries")
+            if logger:
+                logger.error(f"Failed to sync {user.username}")
+    except Exception as e:
+        result["errors"].append(str(e))
+        if logger:
+            logger.error(f"Error syncing {user.username}: {e}")
+
+    return result
