@@ -18,7 +18,8 @@ function Logs() {
     fetch('/api/logs/recent?limit=100')
       .then(res => res.json())
       .then(data => {
-        setLogs(data.logs || []);
+        // Backend returns a list directly, not { logs: [...] }
+        setLogs(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
