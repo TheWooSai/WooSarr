@@ -129,6 +129,7 @@ function Setup() {
     return (
       <div>
         <h2>Setup: Plex Integration</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         {plexAuthenticated ? (
           <div>
             <p>Connected to: {plexServerName}</p>
