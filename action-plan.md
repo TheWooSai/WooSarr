@@ -197,8 +197,8 @@ _Depends on: P1-07_
 
 _Depends on: P1-05, P0-02, P0-03_
 
-- [ ] **P3-00** Define `PlexGateway` interface (D1b): `list_users()`, `list_libraries()`, `get_user_shared_library_keys(user)`, `set_user_libraries(user, full_set)`, plus auth methods; implement with python-plexapi and a fake in-memory implementation for tests. **Acceptance:** sync engine tests run entirely against the fake.
-- [ ] **P3-01** Plex OAuth login flow using `MyPlexPinLogin(oauth=True)` (and JWT refresh per P0-02): start, poll/callback via API endpoints (not blocking threads on the request path), store token encrypted, handle expiry/revocation (N1, N2). **Acceptance:** can sign in via browser; no token appears in logs/UI.
+- [x] **P3-00** Define `PlexGateway` interface (D1b): `list_users()`, `list_libraries()`, `get_user_shared_library_keys(user)`, `set_user_libraries(user, full_set)`, plus auth methods; implement with python-plexapi and a fake in-memory implementation for tests. **Acceptance:** sync engine tests run entirely against the fake.
+- [x] **P3-01** Plex OAuth login flow using `MyPlexPinLogin(oauth=True)` (and JWT refresh per P0-02): start, poll/callback via API endpoints (not blocking threads on the request path), store token encrypted, handle expiry/revocation (N1, N2). **Acceptance:** can sign in via browser; no token appears in logs/UI.
 - [ ] **P3-02** Server discovery/selection (list owned servers, choose one, store machine identifier). **Acceptance:** selected server persisted.
 - [ ] **P3-03** Library sync: fetch libraries (key, title, type), upsert to DB, handle removals/renames. **Acceptance:** libraries match Plex.
 - [ ] **P3-04** User sync: fetch all users with access (incl. managed/home), store, mark removed. **Acceptance:** users match Plex.
@@ -210,7 +210,7 @@ _Depends on: P1-05, P0-02, P0-03_
 
 _Depends on: P1-05, P0-05_
 
-- [ ] **P4-01** Bot lifecycle manager: start/stop/restart from settings without container restart; token from secrets manager. **Acceptance:** bot connects/disconnects via API call.
+- [x] **P4-01** Bot lifecycle manager: start/stop/restart from settings without container restart; token from secrets manager. **Acceptance:** bot connects/disconnects via API call.
 - [ ] **P4-02** Guild selection + cache of roles and members (requires Members intent). **Acceptance:** roles/members appear in DB.
 - [ ] **P4-03** Event handlers: member role add/remove, role update, role delete, member join/leave → emit events to sync engine queue. **Acceptance:** events logged and queued.
 - [ ] **P4-04** Account linking per D4: `/link` slash command that prompts user to either enter their Plex username directly or authenticate via Plex OAuth for automatic username capture. After linking, discard credentials/tokens — store only the plex_user_id ↔ discord_user_id mapping. Also provide manual link/unlink API for admins. **Acceptance:** a Plex user can be linked via both methods; link audit logged with method; no credentials stored after linking.
@@ -220,8 +220,8 @@ _Depends on: P1-05, P0-05_
 
 _Depends on: P3-05, P4-03, P4-04_
 
-- [ ] **P5-01** Implement pure desired-state calculator per §5 with exemptions, manual grants, and N3–N6. **Acceptance:** unit tests cover every edge case listed in §5; 100% branch coverage on this module.
-- [ ] **P5-02** Diff + apply layer with dry-run (D12), per-user transactional behavior, and audit logging (who/what/why). **Acceptance:** dry-run produces identical plan without writes.
+- [x] **P5-01** Implement pure desired-state calculator per §5 with exemptions, manual grants, and N3–N6. **Acceptance:** unit tests cover every edge case listed in §5; 100% branch coverage on this module.
+- [x] **P5-02** Diff + apply layer with dry-run (D12), per-user transactional behavior, and audit logging (who/what/why). **Acceptance:** dry-run produces identical plan without writes.
 - [ ] **P5-03** Event-driven triggers (D8): debounce/queue role events per user; handle role modified/deleted and mapping changes (reconcile affected users). **Acceptance:** integration tests for each trigger.
 - [ ] **P5-04** Periodic full reconcile + manual "Sync now" (per-user and global). **Acceptance:** drift introduced manually in Plex is corrected only where policy says so.
 - [ ] **P5-05** Concurrency control (single-writer lock per user/global) and idempotency. **Acceptance:** running twice yields no changes the second time.
